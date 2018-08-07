@@ -4,16 +4,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
-
 public class Test_Code {
-ArrayList<Double> al=new ArrayList<Double>();
-	
+ArrayList<Double> axis=new ArrayList<Double>();
+ArrayList<Double> sun=new ArrayList<Double>();
+ArrayList<Double> reliance=new ArrayList<Double>();
+ArrayList<Double> bajaj=new ArrayList<Double>();
+ArrayList<Double> titan=new ArrayList<Double>();
 	Scanner sc=new Scanner(System.in);
 	int count_time=0;
 	int count_ema=0;
+	double sum=0;
 	void check_time()
 	{	
-		int i=1000;//have to delete this line
+		int i=1000;//have to delete this line to run program according computer time
 		if(i>920)
 		{
           count_time++;
@@ -39,8 +42,6 @@ ArrayList<Double> al=new ArrayList<Double>();
 			all_trade();
 			System.out.println("price is less than vwap");
 			proceed();
-			//System.exit(0);
-			
 		}
 	}
 	void check_half()
@@ -68,40 +69,34 @@ ArrayList<Double> al=new ArrayList<Double>();
 		exit_price=close;
 	}
      void exit_price()
-     {
-    	 
+     { 
     	 if(exit_price>vwap)
     	 {
     		 System.out.println("you can exit");
-    		 exit_price=close;
-    		 ema();//ema ki entry nai chahiye sirf calcuation
+    		 ema_cal();
     		 vwap();
     		 System.out.println("close value of the day is  "+close);
     		 System.exit(0);
     	 }
     	 else
     	 {
-    		 System.out.println("to exit for the day you have to enter value more than vwap value"); 
-              //enter_exit_price();
+    		 System.out.println("to exit for the day you have to enter value more than vwap value");
     	 }
      }
 	 // check method
     void check()
     {
-    	//enter();
-    	//check_ema();
-        check_time();
-        check_half();
+     check_time();
+     check_half();
      System.out.println("trade started");
-     enter();
-     check_ema();
      ema();
+     check_ema();
      vwap();
      proceed();
     }
     void proceed()
     {
-    	System.out.println("press 1. next entry 2. exit 3. Select Company");
+    	System.out.println("Press 1. next entry 2. exit 3. Select Company");
     	int pro=sc.nextInt();
     	switch(pro)
     	{
@@ -114,7 +109,6 @@ ArrayList<Double> al=new ArrayList<Double>();
     	{
     		enter_exit_price();
     		exit_price();
-    		//exit();
     		all_trade();
     		System.exit(0);
     		break;
@@ -133,6 +127,11 @@ ArrayList<Double> al=new ArrayList<Double>();
 	{
 		System.out.println("ema calculation method");
 		calculate();
+	}
+	void ema_cal()
+	{
+		new_ema=alpha*close+(1-alpha)*ema50;
+		System.out.println("New ema is  "+new_ema);
 	}
 	// ema method
 	double ent_price;
@@ -199,14 +198,111 @@ ArrayList<Double> al=new ArrayList<Double>();
     	System.out.println("new cum_candv                  "+cum_candv);
     	
     }
-    void all_trade()
+	double rsum=0,tsum=0,bsum=0,ssum=0,asum=0;
+    double rvwap,avwap,tvwap,bvwap,svwap;
+    void axis_cal()
+    {
+    	avwap=candv/newvol;
+    }
+    void axis_trade()
     {   
-    	al.add(vwap);
-    	System.out.println("in trade"+al);
-    	for(Double d:al)
+    	axis_cal();
+    	axis.add(avwap);
+    	System.out.println("trade of axis "+axis);
+    	for(Double ax:axis)
     	{
-    	System.out.println("All vwap is   "+d);
+    	System.out.println("All vwap is   "+ax);
     	}
+    	for(int i=0;i<axis.size();i++)
+    	{
+    		asum=asum+axis.get(i);
+    	}
+    	System.out.println("total trade "+asum);
+    }
+    void sun_cal()
+    {
+    	svwap=candv/newvol;
+    }
+    void sun_trade()
+    {   
+    	sun_cal();
+    	sun.add(svwap);
+    	System.out.println("trade of sun "+sun);
+    	for(Double su:sun)
+    	{
+    	System.out.println("All vwap is   "+su);
+    	}
+    	for(int i=0;i<axis.size();i++)
+    	{
+    		ssum=ssum+axis.get(i);
+    	}
+    	System.out.println("total trade "+ssum);
+    }
+    void reliance_cal()
+    {
+    	rvwap=candv/newvol;
+    }
+    void reliance_trade()
+    {   
+    	reliance_cal();
+    	reliance.add(rvwap);
+    	System.out.println("trade of reliance"+reliance);
+    	for(Double re:reliance)
+    	{
+    	System.out.println("All vwap is   "+re);
+    	}
+    	for(int i=0;i<axis.size();i++)
+    	{
+    		rsum=rsum+axis.get(i);
+    	}
+    	System.out.println("total trade "+rsum);
+    }
+    void bajaj_cal()
+    {
+    	bvwap=candv/newvol;
+    }
+    void bajaj_trade()
+    {   
+    	bajaj_cal();
+    	bajaj.add(bvwap);
+    	System.out.println("trade of bajaj"+bajaj);
+    	for(Double baj:bajaj)
+    	{
+    	System.out.println("All vwap is   "+baj);
+    	}
+    	for(int i=0;i<axis.size();i++)
+    	{
+    		bsum=bsum+axis.get(i);
+    	}
+    	System.out.println("total trade "+bsum);
+    }
+    void titan_cal()
+    {
+    	tvwap=candv/newvol;
+    }
+    void titan_trade()
+    {
+    	titan_cal();
+    	titan.add(tvwap);
+    	System.out.println("trade of titan"+titan);
+    	for(Double tit:titan)
+    	{
+    	System.out.println("All vwap is   "+tit);
+    	}
+    	for(int i=0;i<axis.size();i++)
+    	{
+    		tsum=tsum+axis.get(i);
+    	}
+    	System.out.println("total trade "+tsum);
+    }
+    void all_trade()
+    {
+    	System.out.println("All Trade values");
+    	titan_trade();
+    	reliance_trade();
+    	bajaj_trade();
+    	axis_trade();
+    	sun_trade();
     }
    
 	//time and date method
@@ -231,7 +327,6 @@ ArrayList<Double> al=new ArrayList<Double>();
 	}
 	void select_company()
 	{
-		Scanner sc=new Scanner(System.in);
 	    System.out.println("Select company to start trade");
 	    System.out.println("1.Reliance 2.Axis 3.Sun Pharma 4.Titan 5.Bajaj Finance");
 	    int com=sc.nextInt();
@@ -244,7 +339,7 @@ ArrayList<Double> al=new ArrayList<Double>();
 	    	vwap();
 	    	check();
 	    	proceed();
-	    	all_trade();
+	    	reliance_trade();
 	    break;
 	    }
 	    case 2:
@@ -254,7 +349,7 @@ ArrayList<Double> al=new ArrayList<Double>();
 	    	vwap();
 	    	check();
 	    	proceed();
-	    	all_trade();
+	    	axis_trade();
 	    break;
 	    }
 	    case 3:
@@ -264,7 +359,7 @@ ArrayList<Double> al=new ArrayList<Double>();
 	    	vwap();
 	    	check();
 	    	proceed();
-	    	all_trade();
+	    	sun_trade();
 	    break;
 	    }
 	    case 4:
@@ -274,7 +369,7 @@ ArrayList<Double> al=new ArrayList<Double>();
 	    	vwap();
 	    	check();
 	    	proceed();
-	    	all_trade();
+	    	titan_trade();
 	    break;
 	    }
 	    case 5:
@@ -284,21 +379,32 @@ ArrayList<Double> al=new ArrayList<Double>();
 	    	vwap();
 	    	check();
 	    	proceed();
-	    	all_trade();
+	    	bajaj_trade();
 	    break;
 	    }
 	    default:
-	    	System.out.println("Enter correct number");	
+	    	System.out.println("Enter correct number");
 	    break;
 	    }
-	    }
+	 }
 
 	public static void main(String[] args) {
-    Test_Code tc=new Test_Code();
+	Test_Code.thanx();
+	Test_Code tc=new Test_Code();
     Test_Code.int_time();
     while(true)
     {
     tc.select_company();
+	System.out.println("All Trade Status");
+	tc.all_trade();
     }
+	}
+	static void thanx()
+	{
+		System.out.println("Thank-You for giving me this assignment. It was a really best experiace for me.");
+		System.out.println("I learnt many things while doing this assignment and enjoyed my self with your assignment.");
+		System.out.println("I tried each and every step with honesty and my own coding skills.");
+	    System.out.println("Thanks SkyBulls");
+	    System.out.println("\n"+"\n");
 	}
 }
