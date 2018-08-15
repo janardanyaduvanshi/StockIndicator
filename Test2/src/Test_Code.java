@@ -401,10 +401,7 @@ ArrayList<Double> titan=new ArrayList<Double>();
 	}
 	static void thanx()
 	{
-		System.out.println("Thank-You for giving me this assignment. It was a really best experiace for me.");
-		System.out.println("I learnt many things while doing this assignment and enjoyed my self with your assignment.");
-		System.out.println("I tried each and every step with honesty and my own coding skills.");
-	    System.out.println("Thanks SkyBulls");
-	    System.out.println("\n"+"\n");
+		System.out.println("This code explore the basic idea of the stock indicator");
+		
 	}
 }
